@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analizador SVG</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧩 Analizador de SVG</h1>
+            <p>Sube un archivo SVG para calcular el tamaño real del dibujo</p>
+        </header>
+
+        <main>
+            <section class="upload-section">
+                <div class="upload-zone" id="uploadZone">
+                    <div class="upload-content">
+                        <div class="upload-icon">📁</div>
+                        <p>Arrastra un archivo SVG aquí o haz clic para seleccionar</p>
+                        <input type="file" id="fileInput" accept=".svg,image/svg+xml" hidden>
+                        <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+                            Seleccionar archivo SVG
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-grid">
+                    <div class="svg-preview">
+                        <h3>Vista previa</h3>
+                        <div class="svg-container" id="svgContainer">
+                            <!-- SVG se mostrará aquí -->
+                        </div>
+                    </div>
+                    
+                    <div class="dimensions-info">
+                        <h3>📏 Dimensiones del dibujo</h3>
+                        <div class="dimension-card">
+                            <div class="dimension-item">
+                                <span class="label">Ancho:</span>
+                                <span class="value" id="widthValue">-</span>
+                            </div>
+                            <div class="dimension-item">
+                                <span class="label">Alto:</span>
+                                <span class="value" id="heightValue">-</span>
+                            </div>
+                            <div class="dimension-summary">
+                                <strong>Tamaño del dibujo: <span id="dimensionSummary">-</span></strong>
+                            </div>
+                        </div>
+                        
+                        <!-- Controles de redimensionado -->
+                        <div class="resize-controls">
+                            <h4>🎯 Redimensionar SVG</h4>
+                            <div class="resize-inputs">
+                                <div class="input-group">
+                                    <label for="newWidth">Nuevo ancho (mm):</label>
+                                    <input type="number" id="newWidth" step="0.1" min="0.1">
+                                </div>
+                                <div class="input-group">
+                                    <label for="newHeight">Nuevo alto (mm):</label>
+                                    <input type="number" id="newHeight" step="0.1" min="0.1">
+                                </div>
+                                <div class="resize-options">
+                                    <label>
+                                        <input type="checkbox" id="keepAspectRatio" checked>
+                                        Mantener proporción
+                                    </label>
+                                </div>
+                                <div class="resize-buttons">
+                                    <button class="resize-btn" id="applyResize">Aplicar tamaño</button>
+                                    <button class="download-btn" id="downloadSvg" style="display: none;">Descargar SVG</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h4>🎯 Bounding Box</h4>
+                        <div class="bounds-info">
+                            <div class="bound-item">
+                                <span class="label">Min X:</span>
+                                <span class="value" id="minXValue">-</span>
+                            </div>
+                            <div class="bound-item">
+                                <span class="label">Min Y:</span>
+                                <span class="value" id="minYValue">-</span>
+                            </div>
+                            <div class="bound-item">
+                                <span class="label">Max X:</span>
+                                <span class="value" id="maxXValue">-</span>
+                            </div>
+                            <div class="bound-item">
+                                <span class="label">Max Y:</span>
+                                <span class="value" id="maxYValue">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="file-info">
+                    <h4>📄 Información del archivo</h4>
+                    <div id="fileInfo"></div>
+                </div>
+            </section>
+
+            <div class="loading" id="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Analizando SVG...</p>
+            </div>
+
+            <div class="error-message" id="errorMessage" style="display: none;">
+                <span id="errorText"></span>
+                <button onclick="hideError()">✕</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

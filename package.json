@@ -1,0 +1,20 @@
+{
+  "name": "svg-analyzer",
+  "version": "1.0.0",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["svg", "analyzer", "bounding-box", "fusion360"],
+  "author": "",
+  "license": "ISC",
+  "description": "Analizador de archivos SVG para calcular el tamaño real del dibujo",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "multer": "^2.0.1",
+    "svgson": "^5.3.1"
+  }
+}
